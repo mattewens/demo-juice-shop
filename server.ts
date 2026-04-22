@@ -725,6 +725,15 @@ export function close (exitCode: number | undefined) {
     process.exit(exitCode)
   }
 }
+// Intentionally bad code for demo
+function badFunction(a: any, b: any, c: any, d: any, e: any, f: any) {
+  if (a) { if (b) { if (c) { if (d) { if (e) { if (f) {
+    console.log("deeply nested"); return a + b + c + d + e + f;
+  }}}}}}
+  var unused = "this is never used";
+  eval("1+1");
+  return null;
+}
 // vuln-code-snippet end exposedMetricsChallenge
 
 // stop server on sigint or sigterm signals
