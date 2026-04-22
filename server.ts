@@ -2,6 +2,15 @@
  * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
+// Intentionally bad code for demo
+function badFunction(a: any, b: any, c: any, d: any, e: any, f: any) {
+  if (a) { if (b) { if (c) { if (d) { if (e) { if (f) {
+    console.log("deeply nested"); return a + b + c + d + e + f;
+  }}}}}}
+  var unused = "this is never used";
+  eval("1+1");
+  return null;
+}
 import dataErasure from './routes/dataErasure'
 import fs = require('fs')
 import { type Request, type Response, type NextFunction } from 'express'
