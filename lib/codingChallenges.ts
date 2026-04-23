@@ -26,7 +26,12 @@ export const findFilesWithCodeChallenges = async (paths: readonly string[]): Pro
       matches.push(...moreMatches)
     } else {
       try {
-        const code = await fs.readFile(currPath, 'utf8')
+        const resolvedPath = path.resolve(currPath)
+        if (resolvedPath.includes('..') || path.isAbsolute(currPath) !== path.isAbsolute(resolvedPath)) {
+          logger.warn(`File ${currPath} could not be read. it might have been moved or deleted. If coding challenges are contained in the file, they will not be available.`)
+          continue
+        }
+        const code = await fs.readFile(resolvedPath, 'utf8')
         if (
           // strings are split so that it doesn't find itself...
           code.includes('// vuln-code' + '-snippet start') ||
